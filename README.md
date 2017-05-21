@@ -1,46 +1,49 @@
-# md5/aes-128-ecb packet encoder
+# MD5/AES-128-ecb packet encoder
 
-## Setup
+A demo of utilizing MD5/AES to encrypt packets.
 
-- Install cmake
-- Install openssl (1.1.x)
-- (optional) visual studio community
+# Setup
 
-### Prepare the source tree
+## Common
 
+- CMake
+- OpenSSL (1.1.x)
+
+## Windows
+
+- Visual Studio Community
+- Rebuild OpenSSL
+    - Install ActivePerl
+    - Install NASM
+
+    Open a privilege mode "VC Developer Command Window" 
+```
+    perl Configure VC-WIN32 no-shared
+    nmake
+    nmake install
+```
+
+## Prepare the source tree
+
+```
     git clone https://github.com/Ed-Yang/encpkt.git    
     cd encpkt
     git clone https://github.com/Ed-Yang/tiny-AES128-C.git
+```
 
-## Reference source code
+# Build
 
-### MD5
-https://sourceforge.net/projects/libmd5-rfc/
-
-### AES 
-* https://github.com/Ed-Yang/tiny-AES128-C.git (Modified) 
-* https://github.com/kokke/tiny-AES128-C.git (Original)
-
-## Build
-
-### Windows
-
-    * NOTE.  If openssl is not installed on default path, set the
-      environment variable like:
-
-      set OPENSSL_ROOT_DIR=\Packages\openssl
-
-    open Visual Studio 2017 Developer Command Prompt and optionaly
-    set the openssl environment variable as above.
+## Windows
     
-    In standard installation, the path of batch file is:
+    In standard installation, the path of "VC Developer Command Window" is:
     
     "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     
     Alternatively, you can open left down side search window to locate "VsDevCmd.bat" 
 
 ```
-    vsDevCmd.bat
+    Open a privilege mode "VC Developer Command Window" (vsDevCmd.bat)
+    set OPENSSL_ROOT_DIR=C:\Program Files (x86)\OpenSSL
     mkdir Win32
     cd Win32
     cmake -G "NMake Makefiles" ..
@@ -49,7 +52,7 @@ https://sourceforge.net/projects/libmd5-rfc/
 
     * Output executions files are under "Win32\sample" directory
 
-### Linux
+## Linux
 
 ```
     mkdir build
@@ -61,7 +64,7 @@ https://sourceforge.net/projects/libmd5-rfc/
     * Output executions files are under "build/sample" directory
 
 
-## Run
+# Run
 
     
 ## Encryption/decryption test
@@ -125,10 +128,19 @@ https://sourceforge.net/projects/libmd5-rfc/
     size 25 - OK (n = 25)
 ```
 
-## API
+# API
 
 ```C
-int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, const char *psk);
-uint16_t pkt_decode(char *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk);
+    int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, const char *psk);
+    uint16_t pkt_decode(char *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk);
 ```
+
+# Reference
+
+## MD5
+    * https://sourceforge.net/projects/libmd5-rfc/
+
+## AES 
+    * https://github.com/kokke/tiny-AES128-C.git (Original)
+    * https://github.com/Ed-Yang/tiny-AES128-C.git (Modified) 
 
