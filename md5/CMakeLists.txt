@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.0.2)
+project(md5)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+SET(CMAKE_DEFAULT_STARTUP_PROJECT md5main)
+
+SET(GCC_COVERAGE_COMPILE_FLAGS "")
+IF (WIN32)
+SET(GCC_COVERAGE_LINK_FLAGS "")
+ELSE()
+SET(GCC_COVERAGE_LINK_FLAGS "-lm")
+ENDIF()
+
+file(GLOB SOURCES "md5.c")
+
+SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
+
+# lib
+add_library(md5 STATIC ${SOURCES})
+
+# exe
+add_executable(md5main md5main.c)
+target_link_libraries(md5main md5)
+
