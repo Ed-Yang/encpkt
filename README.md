@@ -9,6 +9,26 @@ A demo of utilizing MD5/AES to encrypt packets.
 - [CMake 64 bits](https://cmake.org/files/v3.8/cmake-3.8.1-win64-x64.msi)
 - [OpenSSL-1.1.0e source](https://www.openssl.org/source/openssl-1.1.0e.tar.gz)
 
+## Linux
+
+- Rebuld OpenSSL
+```
+    wget https://www.openssl.org/source/openssl-1.1.0e.tar.gz
+    tar xvf openssl-1.1-0e.tar.gz
+    cd openssl-1.1-0e
+    ./config
+    make
+    make test
+    sudo make install
+    
+    * reboot Linux and vefiy OpenSSL installation
+
+    openssl
+    OpenSSL> version
+    OpenSSL 1.1.0e  16 Feb 2017
+    OpenSSL>     
+```
+
 ## Windows
 
 - [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
@@ -152,4 +172,10 @@ A demo of utilizing MD5/AES to encrypt packets.
 ## AES 
     * https://github.com/kokke/tiny-AES128-C.git (Original)
     * https://github.com/Ed-Yang/tiny-AES128-C.git (Modified) 
+
+
+#OpenSSL
+#MD5
+#AES
+
 
