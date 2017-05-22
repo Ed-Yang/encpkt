@@ -176,7 +176,14 @@ int main(int argc, char **argv)
             fill_test_data((char *)test_buf, size);
             
             en_pkt = (PKT_HDR_T *)tx_data;
-            n = pkt_encode((char *)en_pkt, PKT_MAX_DSIZE, test_buf, size, psk);
+            n = pkt_encode(en_pkt, PKT_MAX_DSIZE, test_buf, size, psk);
+
+            if (n <= 0)
+            {
+                printf("encode error !! (size = %d, n = %d)\n", size, n);
+                closesocket(sockfd);
+                return -1;
+            }
 
             if ((sendto(sockfd, (char *)en_pkt, n, 0, (struct sockaddr *) &addr, sizeof(addr))) != n)
             {
@@ -192,14 +199,21 @@ int main(int argc, char **argv)
         if (recv_flag)
         {             
             fromlen = sizeof(raddr);
-            if ((rx_size=recvfrom(sockfd, (char *)rx_data, sizeof(rx_data), 0, (struct sockaddr *)&raddr, &fromlen)) < 0)
+            if ((rx_size=recvfrom(sockfd, (char *)rx_data, sizeof(rx_data), 0, (struct sockaddr *)&raddr, &fromlen)) <= 0)
             {
                 perror("recvfrom");
                 closesocket(sockfd);
                 return -1;
             }           
             
-            n = pkt_decode(de_data, PKT_MAX_DSIZE, (char *)rx_data, rx_size, psk);
+            n = pkt_decode(de_data, PKT_MAX_DSIZE, (PKT_HDR_T *)rx_data, rx_size, psk);
+
+            if (n <= 0)
+            {
+                printf("deencode error !! (rx_size = %d, n = %d)\n", rx_size, n);
+                closesocket(sockfd);
+                return -1;
+            }
 
             if (verbose)
                 printf("recv rx_size %d n %d\n", rx_size, n);

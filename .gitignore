@@ -1,5 +1,6 @@
 # Cmake build folders #
 #######################
+.vscode
 build
 vs
 Win32

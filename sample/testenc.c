@@ -61,7 +61,7 @@ main(int argc, char *argv[])
     {
         memset(data, 0, sizeof(data));
         fill_test_data(data, i);
-        en_size = pkt_encode((char *)en_pkt, PKT_MAX_DSIZE, data, i, psk);
+        en_size = pkt_encode(en_pkt, PKT_MAX_DSIZE, data, i, psk);
 
         if (en_size == 0)
         {
@@ -71,7 +71,7 @@ main(int argc, char *argv[])
 
         hex_dump((uint8_t *)en_pkt, en_size);
 
-        de_size = pkt_decode(de_data, PKT_MAX_DSIZE, (char *)en_pkt, en_size, psk);
+        de_size = pkt_decode(de_data, PKT_MAX_DSIZE, (PKT_HDR_T *)en_pkt, en_size, psk);
         if (verify_test_data(de_data, i) < 0)
         {
             printf("FAILED at %d\n", i);

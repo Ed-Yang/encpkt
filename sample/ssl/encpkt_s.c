@@ -22,7 +22,7 @@
  *  return 
  *    success, total output data length
  */
-int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, const char *psk)
+int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const char *data, const uint16_t len, const char *psk)
 {
     uint8_t digest[16];
     PKT_HDR_T *pkt = (PKT_HDR_T *)packet;
@@ -32,6 +32,20 @@ int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, 
     EVP_CIPHER_CTX *ctx;
     int rv, en_len, pad_len;
     uint8_t pad[PKT_BLK_SIZE];
+
+    /* check input data size */
+    if (PKT_ALIGN16(len) > PKT_MAX_DSIZE)
+    {
+        /* data too large */
+        return 0;
+    }
+
+    /* check output buffer size */
+    if ( (PKT_ALIGN16(len) + sizeof(PKT_HDR_T))  > pkt_len)
+    {
+        /* output buffer too small */
+        return 0;
+    }
 
     /* generate digest as input key of aes */
     MD5(psk, strlen(psk), digest); 
@@ -107,17 +121,7 @@ int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, 
     return total ;
 }
 
-/*
- * pkt_decode
- *  data - decoded packet
- *  out_len - output buffer size
- *  data - input cipher text
- *  len - input data buffer size
- *  psk - pre-shared key string 
- *  return 
- *    success, total output data length
- */
-uint16_t pkt_decode(char *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk)
+uint16_t pkt_decode(char *data, const uint16_t len, const PKT_HDR_T *packet, const uint16_t pkt_len, const char *psk)
 {    
     uint8_t digest[16];
     PKT_HDR_T *pkt = (PKT_HDR_T *)packet;

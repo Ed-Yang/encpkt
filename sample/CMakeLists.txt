@@ -10,7 +10,11 @@ set(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS}" "ECB=1")
 #
 # if failed to find openssl, set env variable
 # set OPENSSL_ROOT_DIR=<root of openssl>
-# ex. set OPENSSL_ROOT_DIR=\Packages\openssl
+# ex. 
+#   
+#   set OPENSSL_ROOT_DIR=C:\Program Files (x86)\OpenSSL
+#   or
+#   set OPENSSL_ROOT_DIR=\Packages\openssl 
 #
 
 find_package(OpenSSL) 

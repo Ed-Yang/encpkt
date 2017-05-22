@@ -13,6 +13,7 @@ extern "C" {
 #define PKT_MAGIC       0x43434343 // '++++'
 #define PKT_MAX_DSIZE   2000
 #define PKT_BLK_SIZE    16
+#define PKT_ALIGN16(a) (1 + (((a)-1) | (16 - 1)))
 
 #pragma pack(1)
 
@@ -29,8 +30,8 @@ typedef struct PKT_HDR_T
 #pragma pack()
 
 
-int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, const char *psk);
-uint16_t pkt_decode(char *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk);
+int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const char *data, const uint16_t len, const char *psk);
+uint16_t pkt_decode(char *data, const uint16_t len, const PKT_HDR_T *packet, const uint16_t pkt_len, const char *psk);
 
 #ifdef __cplusplus
 }
