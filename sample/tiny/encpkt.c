@@ -14,6 +14,9 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const char *data, const uint
     int i, total, n;
     char last_blk[16];
 
+    if (data == NULL || packet == NULL || psk == NULL)
+        return 0;
+
     /* check input data size */
     if (PKT_ALIGN16(len) > PKT_MAX_DSIZE)
     {
@@ -72,6 +75,9 @@ uint16_t pkt_decode(char *data, const uint16_t len, const PKT_HDR_T *packet, con
     uint8_t *p;
     int i, payload_len;
     char last_blk[PKT_BLK_SIZE];
+
+    if (data == NULL || packet == NULL || psk == NULL)
+        return 0;
 
     /* generate digest as input key of aes */
 	md5_init(&state);

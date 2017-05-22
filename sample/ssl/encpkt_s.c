@@ -33,6 +33,9 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const char *data, const uint
     int rv, en_len, pad_len;
     uint8_t pad[PKT_BLK_SIZE];
 
+    if (data == NULL || packet == NULL || psk == NULL)
+        return 0;
+
     /* check input data size */
     if (PKT_ALIGN16(len) > PKT_MAX_DSIZE)
     {
@@ -131,6 +134,9 @@ uint16_t pkt_decode(char *data, const uint16_t len, const PKT_HDR_T *packet, con
     int payload_len;
     EVP_CIPHER_CTX *ctx;    
     int rv, total, de_len;
+
+    if (data == NULL || packet == NULL || psk == NULL)
+        return 0;
 
     /* generate digest as input key of aes */
     MD5(psk, strlen(psk), digest); 
