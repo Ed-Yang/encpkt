@@ -6,19 +6,28 @@ A demo of utilizing MD5/AES to encrypt packets.
 
 ## Common
 
-- CMake
-- OpenSSL (1.1.x)
+- [CMake 64 bits](https://cmake.org/files/v3.8/cmake-3.8.1-win64-x64.msi)
+- [OpenSSL-1.1.0e source](https://www.openssl.org/source/openssl-1.1.0e.tar.gz)
 
 ## Windows
 
-- Visual Studio Community
+- [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15)
 - Rebuild OpenSSL
-    - Install ActivePerl
-    - Install NASM
+    - Install [ActivePerl](https://www.activestate.com/activeperl/downloads/thank-you?dl=http://downloads.activestate.com/ActivePerl/releases/5.24.1.2402/ActivePerl-5.24.1.2402-MSWin32-x64-401627.exe)
+    - Optionall, Install 
+        * [NASM 32-bits](http://www.nasm.us/pub/nasm/releasebuilds/2.13.01/win32/nasm-2.13.01-installer-x86.exe)
+        * [NASM 64-bits](http://www.nasm.us/pub/nasm/releasebuilds/2.13.01/win64/nasm-2.13.01-installer-x64.exe)  
+    
+    In this sample, we use "no-asm", so there is no need to install it.   
 
-    Open a privilege mode "VC Developer Command Window" 
+    Open a privilege mode "VC Developer Command Window" (32 bits or 64 bits)
 ```
-    perl Configure VC-WIN32 no-shared
+    * 32-bits
+    perl Configure VC-WIN32 no-shared no-asm
+
+    * 64-bits  
+    perl Configure VC-WIN64A no-shared no-asm
+
     nmake
     nmake install
 ```
