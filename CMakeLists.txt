@@ -11,9 +11,11 @@ SET(GCC_COVERAGE_COMPILE_FLAGS "ECB=1")
 include(CMakeToolsHelpers OPTIONAL)
 
 IF (WIN32)
-SET(GCC_COVERAGE_LINK_FLAGS "")
+    add_definitions(/WX)
+    set(GCC_COVERAGE_LINK_FLAGS "")
 ELSE()
-SET(GCC_COVERAGE_LINK_FLAGS "-lm")
+    add_definitions(-Werror)
+    set(GCC_COVERAGE_LINK_FLAGS "-lm")
 ENDIF()
 
 file(GLOB SOURCES "./*.c")

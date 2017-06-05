@@ -160,8 +160,8 @@ A demo of utilizing MD5/AES to encrypt packets.
 # API
 
 ```C
-    int pkt_encode(char *packet, int pkt_len, const char *data, const uint16_t len, const char *psk);
-    uint16_t pkt_decode(char *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk);
+    int pkt_encode(char *packet, int pkt_len, const uint8_t *data, const uint16_t len, const char *psk);
+    uint16_t pkt_decode(uint8_t *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk);
 ```
 
 # Reference

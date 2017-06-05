@@ -3,7 +3,7 @@
 #include "md5/md5.h"
 #include "tiny-AES128-C/aes.h"
 
-int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const char *data, const uint16_t len, const char *psk)
+int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const uint16_t len, const char *psk)
 {
 	md5_state_t state;
 	md5_byte_t digest[16];
@@ -64,7 +64,7 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const char *data, const uint
     return total ;
 }
 
-uint16_t pkt_decode(char *data, const uint16_t len, const PKT_HDR_T *packet, const uint16_t pkt_len, const char *psk)
+uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, const uint16_t pkt_len, const char *psk)
 {
 	md5_state_t state;
 	md5_byte_t digest[16];
