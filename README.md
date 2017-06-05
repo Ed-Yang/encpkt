@@ -65,7 +65,7 @@ A demo of utilizing MD5/AES to encrypt packets.
 ## Prepare the source tree
 
 ```
-    git clone https://github.com/Ed-Yang/encpkt.git    
+    git clone --recursive https://github.com/Ed-Yang/encpkt.git    
 ```
 
 # Build
