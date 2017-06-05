@@ -3,6 +3,7 @@
 
 #ifdef WIN32
 #include <winsock2.h>
+#include <WS2tcpip.h> // socklen_t
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>
