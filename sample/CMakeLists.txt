@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.0.2)
 project(sample)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_DEFAULT_STARTUP_PROJECT tinytest)
 
 set(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS}" "ECB=1")
 
@@ -27,7 +26,7 @@ message (STATUS ${OPENSSL_LIBRARIES})
 # vscode cmake tools
 include(CMakeToolsHelpers OPTIONAL)
 
-include_directories("./" "../" "../md5" "../getopt" "../tiny-AES128-C" ${OPENSSL_INCLUDE_DIR})
+include_directories("./" "../external" "../external/md5" "../external/getopt" "../external/tiny-AES128-C" ${OPENSSL_INCLUDE_DIR})
 
 if (WIN32)
 set(GCC_COVERAGE_LINK_FLAGS "")

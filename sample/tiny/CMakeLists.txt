@@ -9,7 +9,7 @@ set(GCC_COVERAGE_COMPILE_FLAGS "ECB=1")
 # vscode cmake tools
 include(CMakeToolsHelpers OPTIONAL)
 
-include_directories("./" "../" "../md5" "../tiny-AES128-C")
+include_directories("./" "../external" "../external/md5" "../external/tiny-AES128-C")
 
 if (WIN32)
 set(GCC_COVERAGE_LINK_FLAGS "")

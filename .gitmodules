@@ -1,0 +1,3 @@
+[submodule "external/tiny-AES128-C"]
+	path = external/tiny-AES128-C
+	url = https://github.com/Ed-Yang/tiny-AES128-C.git

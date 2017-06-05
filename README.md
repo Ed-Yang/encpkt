@@ -66,8 +66,6 @@ A demo of utilizing MD5/AES to encrypt packets.
 
 ```
     git clone https://github.com/Ed-Yang/encpkt.git    
-    cd encpkt
-    git clone https://github.com/Ed-Yang/tiny-AES128-C.git
 ```
 
 # Build
@@ -105,8 +103,8 @@ A demo of utilizing MD5/AES to encrypt packets.
 ## macOS
 
 ```
-    mkdir xcode
-    cd xcode
+    mkdir macos
+    cd macos
     cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib ..
     make
 ```   
