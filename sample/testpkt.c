@@ -89,7 +89,6 @@ int main(int argc, char **argv)
     int send_flag = 0, recv_flag = 0, verbose=0;
     int port = TEST_UDP_PORT;
     int count = 10;
-    char *cvalue = NULL;
     int c;
     struct sockaddr_in addr, raddr;
     int sockfd;
