@@ -105,8 +105,8 @@ A demo of utilizing MD5/AES to encrypt packets.
 ## macOS
 
 ```
-    mkdir build
-    cd build
+    mkdir xcode
+    cd xcode
     cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib ..
     make
 ```   
@@ -118,8 +118,15 @@ A demo of utilizing MD5/AES to encrypt packets.
     
 ## Encryption/decryption test
 
+### Windows
+
     .\sample\tinytest
     .\sample\ssltest
+
+### Linux/macOS
+
+    ./sample/tinytest
+    ./sample/ssltest
 
 ## UDP encrytption/decryption test
 
