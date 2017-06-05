@@ -9,10 +9,10 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const u
 	md5_byte_t digest[16];
     
     PKT_HDR_T *pkt = (PKT_HDR_T *)packet;
-    char *dataptr;
+    uint8_t *dataptr;
     uint8_t *p;
     int i, total, n;
-    char last_blk[16];
+    uint8_t last_blk[16];
 
     if (data == NULL || packet == NULL || psk == NULL)
         return 0;
@@ -36,7 +36,7 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const u
 	md5_append(&state, (const md5_byte_t *)psk, strlen(psk));
 	md5_finish(&state, digest);
 
-    dataptr = (char *)(pkt + 1);
+    dataptr = (uint8_t *)(pkt + 1);
 
     memset((char *)pkt, 0, sizeof(PKT_HDR_T));
     pkt->magic = PKT_MAGIC;
@@ -70,11 +70,11 @@ uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, 
 	md5_byte_t digest[16];
     
     PKT_HDR_T *pkt = (PKT_HDR_T *)packet;
-    char *dataptr;
+    uint8_t *dataptr;
     uint16_t data_len;
     uint8_t *p;
     int i, payload_len;
-    char last_blk[PKT_BLK_SIZE];
+    uint8_t last_blk[PKT_BLK_SIZE];
 
     if (data == NULL || packet == NULL || psk == NULL)
         return 0;
@@ -84,7 +84,7 @@ uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, 
 	md5_append(&state, (const md5_byte_t *)psk, strlen(psk));
 	md5_finish(&state, digest);
     
-    dataptr = (char *)(pkt + 1);
+    dataptr = (uint8_t *)(pkt + 1);
 
     if (pkt->magic != PKT_MAGIC)
         return 0;

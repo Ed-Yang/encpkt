@@ -45,12 +45,22 @@ A demo of utilizing MD5/AES to encrypt packets.
     * 32-bits
     perl Configure VC-WIN32 no-shared no-asm
 
-    * 64-bits  
+    * 64-bits
     perl Configure VC-WIN64A no-shared no-asm
 
     nmake
     nmake install
 ```
+
+## macOS
+
+- Install OpenSSL
+
+```
+    brew install openssl
+```
+
+
 
 ## Prepare the source tree
 
@@ -92,6 +102,16 @@ A demo of utilizing MD5/AES to encrypt packets.
 
     * Output executions files are under "build/sample" directory
 
+## macOS
+
+```
+    mkdir build
+    cd build
+    cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl -DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib ..
+    make
+```   
+
+    * Output executions files are under "build/sample" directory
 
 # Run
 
@@ -160,8 +180,8 @@ A demo of utilizing MD5/AES to encrypt packets.
 # API
 
 ```C
-    int pkt_encode(char *packet, int pkt_len, const uint8_t *data, const uint16_t len, const char *psk);
-    uint16_t pkt_decode(uint8_t *data, const uint16_t len, const char *packet, const int pkt_len, const char *psk);
+int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const uint16_t len, const char *psk);
+uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, const uint16_t pkt_len, const char *psk);
 ```
 
 # Reference

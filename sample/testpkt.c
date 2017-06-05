@@ -92,11 +92,12 @@ int main(int argc, char **argv)
     int c;
     struct sockaddr_in addr, raddr;
     int sockfd;
-    int i, size, fromlen, n, rx_size;
+    int i, size, n, rx_size;
+    socklen_t fromlen;
     uint8_t test_buf[PKT_MAX_DSIZE];
     PKT_HDR_T *en_pkt;
     char rx_data[PKT_MAX_DSIZE+16], tx_data[PKT_MAX_DSIZE+16];
-    char de_data[PKT_MAX_DSIZE];
+    uint8_t de_data[PKT_MAX_DSIZE];
     char psk[] = "this is the key";
 
 #ifdef WIN32
@@ -199,7 +200,8 @@ int main(int argc, char **argv)
         if (recv_flag)
         {             
             fromlen = sizeof(raddr);
-            if ((rx_size=recvfrom(sockfd, (char *)rx_data, sizeof(rx_data), 0, (struct sockaddr *)&raddr, &fromlen)) <= 0)
+            if ((rx_size=recvfrom(sockfd, (char *)rx_data, sizeof(rx_data), 0, 
+                (struct sockaddr *)&raddr, &fromlen)) <= 0)
             {
                 perror("recvfrom");
                 closesocket(sockfd);

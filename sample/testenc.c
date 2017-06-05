@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "encpkt.h"
 
-void fill_test_data(char *buf, int len)
+void fill_test_data(uint8_t *buf, int len)
 {
     int i ;
 
@@ -11,7 +11,7 @@ void fill_test_data(char *buf, int len)
     return ;
 }
 
-int verify_test_data(char *buf, int len)
+int verify_test_data(uint8_t *buf, int len)
 {
     int i ;
 
@@ -48,8 +48,8 @@ main(int argc, char *argv[])
 {
     const char psk[]="this is the secret"; // pre-shared key
     PKT_HDR_T *en_pkt;
-    char *de_data;
-    char data[PKT_MAX_DSIZE];
+    uint8_t *de_data;
+    uint8_t data[PKT_MAX_DSIZE];
     int i;
     int en_size, de_size;
 

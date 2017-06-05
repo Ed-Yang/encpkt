@@ -26,8 +26,8 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const u
 {
     uint8_t digest[16];
     PKT_HDR_T *pkt = (PKT_HDR_T *)packet;
-    char *dataptr;
-    char *p;
+    uint8_t *dataptr;
+    uint8_t *p;
     int total;
     EVP_CIPHER_CTX *ctx;
     int rv, en_len, pad_len;
@@ -51,14 +51,14 @@ int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const u
     }
 
     /* generate digest as input key of aes */
-    MD5(psk, strlen(psk), digest); 
+    MD5((uint8_t *)psk, strlen(psk), digest); 
 
-    dataptr = (char *)pkt;
+    dataptr = (uint8_t *)pkt;
 
     memset((char *)pkt, 0, sizeof(PKT_HDR_T));
     pkt->magic = PKT_MAGIC;
 
-    p = (char *) &pkt->data_len ;
+    p = (uint8_t *) &pkt->data_len ;
     p[0] = (len & 0xff00) >> 8;
     p[1] = len & 0xff;
 
@@ -128,7 +128,7 @@ uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, 
 {    
     uint8_t digest[16];
     PKT_HDR_T *pkt = (PKT_HDR_T *)packet;
-    char *dataptr;
+    uint8_t *dataptr;
     uint16_t data_len;
     uint8_t *p;
     int payload_len;
@@ -139,9 +139,9 @@ uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, 
         return 0;
 
     /* generate digest as input key of aes */
-    MD5(psk, strlen(psk), digest); 
+    MD5((uint8_t *)psk, strlen(psk), digest); 
    
-    dataptr = (char *)(pkt + 1);
+    dataptr = (uint8_t *)(pkt + 1);
 
     if (pkt->magic != PKT_MAGIC)
         return 0;
