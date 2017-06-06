@@ -13,7 +13,8 @@ endif()
 
 file(GLOB SOURCES "md5.c")
 
-message(STATUS ${CMAKE_EXE_LINKER_FLAGS})
+# vscode cmake tools
+include(CMakeToolsHelpers OPTIONAL)
 
 # lib
 add_library(md5 STATIC ${SOURCES})

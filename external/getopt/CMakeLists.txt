@@ -6,6 +6,9 @@ SET(CMAKE_BUILD_TYPE Debug)
 
 file(GLOB SOURCES "*.c")
 
+# vscode cmake tools
+include(CMakeToolsHelpers OPTIONAL)
+
 add_library(getopt STATIC ${SOURCES})
 
 

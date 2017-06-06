@@ -20,10 +20,7 @@ find_package(OpenSSL)
 # OPENSSL_LIBRARIES
 # OPENSSL_INCLUDE_DIR
 
-message (STATUS ${OPENSSL_LIBRARIES})
-
-# vscode cmake tools
-include(CMakeToolsHelpers OPTIONAL)
+# message (STATUS ${OPENSSL_LIBRARIES})
 
 include_directories("./" "../external")
 include_directories("../external/md5" "../external/getopt" "../external/tiny-AES128-C")
@@ -44,6 +41,9 @@ set(W32_LIBS "getopt")
 if(WIN32)
     set(W32_LIBS ${W32_LIBS} "wsock32" "Ws2_32" "crypt32")
 endif()
+
+# vscode cmake tools
+include(CMakeToolsHelpers OPTIONAL)
 
 # testenc
 
