@@ -4,24 +4,10 @@ project(encpkt)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 SET(CMAKE_DEFAULT_STARTUP_PROJECT tinypkt)
-
-SET(GCC_COVERAGE_COMPILE_FLAGS "ECB=1")
+SET(CMAKE_BUILD_TYPE Debug)
 
 # vscode cmake tools
 include(CMakeToolsHelpers OPTIONAL)
-
-IF (WIN32)
-    add_definitions(/WX)
-    set(GCC_COVERAGE_LINK_FLAGS "")
-ELSE()
-    add_definitions(-Werror)
-    set(GCC_COVERAGE_LINK_FLAGS "-lm")
-ENDIF()
-
-file(GLOB SOURCES "./*.c")
-
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
-SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
 
 add_subdirectory(sample)
 add_subdirectory(external)

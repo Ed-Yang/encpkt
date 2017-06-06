@@ -3,8 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(sample)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-set(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS}" "ECB=1")
+SET(CMAKE_BUILD_TYPE Debug)
 
 #
 # if failed to find openssl, set env variable
@@ -26,25 +25,24 @@ message (STATUS ${OPENSSL_LIBRARIES})
 # vscode cmake tools
 include(CMakeToolsHelpers OPTIONAL)
 
-include_directories("./" "../external" "../external/md5" "../external/getopt" "../external/tiny-AES128-C" ${OPENSSL_INCLUDE_DIR})
+include_directories("./" "../external")
+include_directories("../external/md5" "../external/getopt" "../external/tiny-AES128-C")
+include_directories(${OPENSSL_INCLUDE_DIR})
 
 if (WIN32)
-set(GCC_COVERAGE_LINK_FLAGS "")
+    set(GCC_COVERAGE_LINK_FLAGS "")
 else()
-set(GCC_COVERAGE_LINK_FLAGS "-lm -lcrypto")
+    set(GCC_COVERAGE_LINK_FLAGS "-lm -lcrypto")
 endif()
 
 file(GLOB TINY_SRC "./tiny/*.c")
 file(GLOB SSL_SRC "./ssl/*.c")
 
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
-SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}" )
-
 
 set(W32_LIBS "getopt")
 
 if(WIN32)
-set(W32_LIBS ${W32_LIBS} "wsock32" "Ws2_32" "crypt32")
+    set(W32_LIBS ${W32_LIBS} "wsock32" "Ws2_32" "crypt32")
 endif()
 
 # testenc
