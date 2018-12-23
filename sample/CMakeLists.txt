@@ -57,9 +57,11 @@ target_link_libraries(sslenc ${OPENSSL_LIBRARIES} ${W32_LIBS})
 
 add_executable(tinypkt ./testpkt.c ${TINY_SRC})
 add_executable(sslpkt ./testpkt.c ${SSL_SRC})
+add_executable(testsha ./testsha.c)
 
 target_link_libraries(tinypkt ${W32_LIBS} md5 aes )
 target_link_libraries(sslpkt ${OPENSSL_LIBRARIES} ${W32_LIBS})
+target_link_libraries(testsha ${OPENSSL_LIBRARIES} ${W32_LIBS})
 
 
 

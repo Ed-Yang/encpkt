@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,6 +39,9 @@ typedef struct PKT_HDR_T
 
 int pkt_encode(PKT_HDR_T *packet, uint16_t pkt_len, const uint8_t *data, const uint16_t len, const char *psk);
 uint16_t pkt_decode(uint8_t *data, const uint16_t len, const PKT_HDR_T *packet, const uint16_t pkt_len, const char *psk);
+
+/* do_sha256: for openssl version test */
+bool do_sha256(uint8_t *data, size_t len, uint8_t *digest);
 
 #ifdef __cplusplus
 }
